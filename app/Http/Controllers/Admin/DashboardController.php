@@ -12,7 +12,7 @@ class DashboardController extends Controller
     {
         $dataFeed = new DataFeed();
 
-        return view('pages.dashboard.dashboard', compact('dataFeed'));
+        return view('admin.dashboard.dashboard', compact('dataFeed'));
     }
 
     public function analytics()

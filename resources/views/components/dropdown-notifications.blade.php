@@ -40,7 +40,7 @@
         <div class="flex items-center justify-between px-4 py-2 border-b border-gray-200 dark:border-gray-700/60">
             <div class="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase">Notifications</div>
             @if($unreadNotifications > 0)
-            <form method="POST" action="{{ route('merchant.notifications.markAllRead') }}">
+            <form method="POST" action="{{ route('notifications.markAllRead') }}">
                 @csrf
                 <button type="submit" class="text-xs text-indigo-600 dark:text-indigo-400 hover:underline">
                     Tandai semua dibaca
@@ -63,14 +63,14 @@
                         </span>
                         <div class="flex space-x-2 mt-2">
                             @if(!$notif->is_read)
-                            <form method="POST" action="{{ route('merchant.notifications.markRead', $notif->id) }}">
+                            <form method="POST" action="{{ route('notifications.markRead', $notif->id) }}">
                                 @csrf
                                 <button type="submit" class="text-xs text-green-600 dark:text-green-400 hover:underline">
                                     Tandai dibaca
                                 </button>
                             </form>
                             @endif
-                            <form method="POST" action="{{ route('merchant.notifications.delete', $notif->id) }}">
+                            <form method="POST" action="{{ route('notifications.delete', $notif->id) }}">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="text-xs text-red-600 dark:text-red-400 hover:underline">

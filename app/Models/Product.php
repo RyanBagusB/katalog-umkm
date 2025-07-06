@@ -39,6 +39,11 @@ class Product extends Model
     {
         return $this->image ? asset('storage/' . $this->image) : null;
     }
+    
+    public function revisions()
+    {
+        return $this->hasMany(ProductRevision::class);
+    }
 
     public function getRouteKeyName()
     {

@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Merchant;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Models\Notification;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -50,6 +52,16 @@ class ProductController extends Controller
             'status' => 'pending',
         ]);
 
+        // Notifikasi admin saat produk baru diajukan
+        $admin = User::where('role', 'admin')->first();
+        if ($admin) {
+            Notification::create([
+                'user_id' => $admin->id,
+                'title' => 'Produk Baru Diajukan',
+                'message' => 'Merchant "' . Auth::user()->name . '" mengajukan produk "' . $request->name . '".',
+            ]);
+        }
+
         return redirect()
             ->route('merchant.products.index')
             ->with('success', 'Produk berhasil diajukan dan menunggu persetujuan admin.');
@@ -73,22 +85,40 @@ class ProductController extends Controller
             'image' => 'nullable|image|max:2048',
         ]);
 
-        $data = $request->only(['name', 'description', 'price']);
-
-        if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('products', 'public');
+        // Cek apakah sudah ada revisi pending
+        if ($product->revisions()->where('status', 'pending')->exists()) {
+            return redirect()
+                ->route('merchant.products.index')
+                ->with('error', 'Anda sudah memiliki revisi yang menunggu persetujuan.');
         }
 
-        // Update slug setiap kali nama diubah
-        $data['slug'] = Str::slug($request->name) . '-' . uniqid();
+        $imagePath = null;
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('products', 'public');
+        }
 
-        $data['status'] = 'pending';
+        // Simpan revisi
+        $revision = $product->revisions()->create([
+            'name' => $request->name,
+            'description' => $request->description,
+            'price' => $request->price,
+            'image' => $imagePath,
+            'status' => 'pending',
+        ]);
 
-        $product->update($data);
+        // Notifikasi admin saat revisi diajukan
+        $admin = User::where('role', 'admin')->first();
+        if ($admin) {
+            Notification::create([
+                'user_id' => $admin->id,
+                'title' => 'Revisi Produk Diajukan',
+                'message' => 'Merchant "' . Auth::user()->name . '" mengajukan revisi produk "' . $product->name . '".',
+            ]);
+        }
 
         return redirect()
             ->route('merchant.products.index')
-            ->with('success', 'Produk berhasil diperbarui dan menunggu persetujuan admin.');
+            ->with('success', 'Revisi produk berhasil diajukan dan menunggu persetujuan admin.');
     }
 
     public function destroy(Product $product)

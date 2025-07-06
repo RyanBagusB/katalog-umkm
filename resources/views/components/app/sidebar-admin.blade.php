@@ -5,10 +5,10 @@
     </h3>
     <ul class="mt-3 space-y-1">
         <li
-            x-data="{ open: {{ Request::is('dashboard*') ? 'true' : 'false' }} }"
+            x-data="{ open: {{ Request::is('admin/dashboard*') ? 'true' : 'false' }} }"
             @class([
                 'pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0 bg-linear-to-r',
-                'from-violet-500/[0.12] dark:from-violet-500/[0.24] to-violet-500/[0.04]' => Request::is('dashboard*')
+                'from-violet-500/[0.12] dark:from-violet-500/[0.24] to-violet-500/[0.04]' => Request::is('admin/dashboard*')
             ])
         >
             <a href="#"
@@ -19,8 +19,8 @@
                         <svg
                             @class([
                                 'shrink-0 fill-current',
-                                'text-violet-500' => Request::is('dashboard*'),
-                                'text-gray-400 dark:text-gray-500' => !Request::is('dashboard*'),
+                                'text-violet-500' => Request::is('admin/dashboard*'),
+                                'text-gray-400 dark:text-gray-500' => !Request::is('admin/dashboard*'),
                             ])
                             xmlns="http://www.w3.org/2000/svg"
                             width="16" height="16"
@@ -45,8 +45,8 @@
                     <li class="mb-1 last:mb-0">
                         <a @class([
                             'block text-gray-500/90 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 transition truncate',
-                            'text-violet-500!' => Route::is('dashboard')
-                        ]) href="{{ route('dashboard') }}">
+                            'text-violet-500!' => Route::is('admin.dashboard')
+                        ]) href="{{ route('admin.dashboard') }}">
                             <span class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
                                 Analytics
                             </span>

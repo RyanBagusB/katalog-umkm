@@ -39,8 +39,10 @@
                 $role = auth()->user()?->role;
             @endphp
 
-            @if($role === 'admin')
+            @if ($role === 'admin')
                 @include('components.app.sidebar-admin')
+            @elseif ($role === 'merchant')
+                @include('components.app.sidebar-merchant')
             @endif
         </div>
 

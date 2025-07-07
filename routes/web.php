@@ -32,3 +32,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::post('/notification/{notification}/mark-read', [\App\Http\Controllers\NotificationController::class, 'markRead'])->name('notifications.markRead');
     Route::delete('/notification/{notification}', [\App\Http\Controllers\NotificationController::class, 'destroy'])->name('notifications.delete');
 });
+
+Route::get('/welcome', function () {
+    return view('user.pages.index');
+})->name('welcome');

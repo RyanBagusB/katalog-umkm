@@ -46,22 +46,41 @@
                                         Rp{{ number_format($product->price, 0, ',', '.') }}
                                     </td>
                                     <td class="p-2">
-                                        @if ($product->status === 'pending')
-                                            <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-yellow-100 text-yellow-800">Menunggu</span>
-                                        @elseif ($product->status === 'approved')
-                                            <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800">Disetujui</span>
+                                        @if ($product->revisions()->where('status', 'pending')->exists())
+                                            <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-yellow-100 text-yellow-800">
+                                                Pembaruan sedang ditinjau
+                                            </span>
                                         @else
-                                            <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-red-100 text-red-800">Ditolak</span>
+                                            @if ($product->status === 'pending')
+                                                <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-yellow-100 text-yellow-800">
+                                                    Menunggu Persetujuan
+                                                </span>
+                                            @elseif ($product->status === 'approved')
+                                                <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800">
+                                                    Ditampilkan
+                                                </span>
+                                            @else
+                                                <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-red-100 text-red-800">
+                                                    Ditolak
+                                                </span>
+                                            @endif
                                         @endif
                                     </td>
                                     <td class="p-2 text-center flex justify-center gap-2">
-                                        <a href="{{ route('merchant.products.edit', $product) }}"
-                                           class="btn flex gap-x-2 items-center bg-white border-gray-200 text-gray-800 hover:bg-gray-100 dark:bg-gray-800 dark:text-gray-100 dark:hover:bg-gray-700">
-                                            <svg class="fill-current" width="16" height="16" viewBox="0 0 16 16">
-                                                <path d="M15.7 2.3l-2-2c-.4-.4-1-.4-1.4 0L1 11.6V15h3.4L15.7 3.7c.4-.4.4-1 0-1.4zM4.3 13H3v-1.3l7.6-7.6 1.3 1.3L4.3 13z"/>
-                                            </svg>
-                                            Edit
-                                        </a>
+                                        @if ($product->status === 'pending')
+                                            <a href="{{ route('merchant.products.show', $product) }}"
+                                               class="btn flex gap-x-2 items-center bg-white border-gray-200 text-gray-800 hover:bg-gray-100 dark:bg-gray-800 dark:text-gray-100 dark:hover:bg-gray-700">
+                                                Detail
+                                            </a>
+                                        @else
+                                            <a href="{{ route('merchant.products.edit', $product) }}"
+                                               class="btn flex gap-x-2 items-center bg-white border-gray-200 text-gray-800 hover:bg-gray-100 dark:bg-gray-800 dark:text-gray-100 dark:hover:bg-gray-700">
+                                                <svg class="fill-current" width="16" height="16" viewBox="0 0 16 16">
+                                                    <path d="M15.7 2.3l-2-2c-.4-.4-1-.4-1.4 0L1 11.6V15h3.4L15.7 3.7c.4-.4.4-1 0-1.4zM4.3 13H3v-1.3l7.6-7.6 1.3 1.3L4.3 13z"/>
+                                                </svg>
+                                                Edit
+                                            </a>
+                                        @endif
 
                                         <div x-data="{ modalOpen: false }">
                                             <button @click="modalOpen = true" type="button"

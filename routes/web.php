@@ -2,7 +2,46 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::redirect('/', 'login');
+Route::get('/', function () {
+    return view('landing.index');
+});
+
+Route::get('/tentang', function () {
+    return view('landing.about');
+});
+
+Route::get('/umkm', function () {
+    return view('landing.merchants');
+});
+
+Route::get('/artikel', function () {
+    return view('landing.articles');
+});
+
+Route::get('/kontak', function () {
+    return view('landing.contact');
+});
+
+Route::get('/umkm/{slug}', function ($slug) {
+    // Dummy data bisa dikirim ke view jika perlu
+    return view('merchants.index', [
+        'slug' => $slug,
+        'nama_usaha' => 'UMKM Karangpoh Sejahtera',
+        'deskripsi' => 'UMKM yang bergerak di bidang kuliner tradisional.',
+        'gambar' => 'images/auth-image.jpg',
+    ]);
+})->name('umkm.show');
+
+// Detail Artikel / Berita
+Route::get('/artikel/{slug}', function ($slug) {
+    return view('landing.detail-article', [
+        'slug' => $slug,
+        'judul' => 'Creating a Cozy Living Room: Tips and Tricks',
+        'isi' => 'Pelatihan ini ditujukan untuk membantu pelaku UMKM go online dan memperluas pasar mereka.',
+        'gambar' => 'images/auth-image.jpg',
+        'tanggal' => '2025-07-08',
+    ]);
+})->name('artikel.show');
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::middleware(['role:admin'])->prefix('admin')->name('admin.')->group(function () {

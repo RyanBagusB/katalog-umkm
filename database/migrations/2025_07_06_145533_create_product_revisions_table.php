@@ -9,13 +9,12 @@ return new class extends Migration {
     {
         Schema::create('product_revisions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('product_id')->constrained()->onDelete('cascade');
+            $table->foreignId('product_id')->constrained()->cascadeOnDelete();
             $table->string('name');
             $table->text('description')->nullable();
             $table->decimal('price', 15, 2);
             $table->string('image')->nullable();
-            $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
-            $table->text('rejection_reason')->nullable();
+            $table->enum('status', ['pending', 'approved', 'rejected']);
             $table->timestamps();
         });
     }

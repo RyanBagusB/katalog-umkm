@@ -22,7 +22,7 @@ class ProductRevisionApprovalController extends Controller
             ->orderBy('created_at', 'desc')
             ->paginate(10);
 
-        return view('admin.product_revisions.index', compact('revisions'));
+        return view('admin.products.revision', compact('revisions'));
     }
 
     public function show(ProductRevision $revision)

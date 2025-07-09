@@ -38,50 +38,50 @@
         x-cloak
     >
         <div class="flex items-center justify-between px-4 py-2 border-b border-gray-200 dark:border-gray-700/60">
-            <div class="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase">Notifications</div>
+            <div class="text-sm font-semibold text-gray-400 dark:text-gray-500 uppercase">Notifications</div>
             @if($unreadNotifications > 0)
-            <form method="POST" action="{{ route('notifications.markAllRead') }}">
-                @csrf
-                <button type="submit" class="text-xs text-indigo-600 dark:text-indigo-400 hover:underline">
-                    Tandai semua dibaca
-                </button>
-            </form>
+                <form method="POST" action="{{ route('notifications.markAllRead') }}">
+                    @csrf
+                    <button type="submit" class="text-sm text-indigo-600 dark:text-indigo-400 hover:underline">
+                        Tandai semua dibaca
+                    </button>
+                </form>
             @endif
         </div>
         <ul>
             @forelse($userNotifications as $notif)
                 <li class="border-b border-gray-200 dark:border-gray-700/60 last:border-0">
-                    <div class="block py-2 px-4 {{ !$notif->is_read ? 'bg-gray-50 dark:bg-gray-700/20' : '' }}">
-                        <span class="block text-sm mb-1">
+                    <div class="block py-3 px-4 {{ !$notif->is_read ? 'bg-gray-50 dark:bg-gray-700/20' : '' }}">
+                        <span class="block text-base mb-1">
                             <span class="font-medium text-gray-800 dark:text-gray-100">{{ $notif->title }}</span>
                         </span>
                         @if($notif->message)
-                            <span class="block text-xs text-gray-500 dark:text-gray-400">{{ $notif->message }}</span>
+                            <span class="block text-sm text-gray-500 dark:text-gray-400">{{ $notif->message }}</span>
                         @endif
-                        <span class="block text-xs font-medium text-gray-400 dark:text-gray-500 mt-1">
+                        <span class="block text-sm font-medium text-gray-400 dark:text-gray-500 mt-1">
                             {{ $notif->created_at->diffForHumans() }}
                         </span>
-                        <div class="flex space-x-2 mt-2">
-                            @if(!$notif->is_read)
+                    </div>
+                    <div class="flex space-x-2 mt-2 px-4 pb-2">
+                        @if(!$notif->is_read)
                             <form method="POST" action="{{ route('notifications.markRead', $notif->id) }}">
                                 @csrf
-                                <button type="submit" class="text-xs text-green-600 dark:text-green-400 hover:underline">
+                                <button type="submit" class="text-sm text-green-600 dark:text-green-400 hover:underline">
                                     Tandai dibaca
                                 </button>
                             </form>
-                            @endif
-                            <form method="POST" action="{{ route('notifications.delete', $notif->id) }}">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="text-xs text-red-600 dark:text-red-400 hover:underline">
-                                    Hapus
-                                </button>
-                            </form>
-                        </div>
+                        @endif
+                        <form method="POST" action="{{ route('notifications.delete', $notif->id) }}">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="text-sm text-red-600 dark:text-red-400 hover:underline">
+                                Hapus
+                            </button>
+                        </form>
                     </div>
                 </li>
             @empty
-                <li class="text-sm text-gray-500 dark:text-gray-400 px-4 py-2">
+                <li class="text-base text-gray-500 dark:text-gray-400 px-4 py-3">
                     Tidak ada notifikasi.
                 </li>
             @endforelse

@@ -18,9 +18,21 @@ class ProductController extends Controller
 
         $products = Product::where('merchant_id', $merchant->id)
             ->latest()
+            ->with(['revisions' => function ($q) {
+                $q->latest();
+            }])
             ->paginate(10);
 
         return view('merchant.products.index', compact('products', 'merchant'));
+    }
+
+    public function show(Product $product)
+    {
+        $this->authorizeProduct($product);
+
+        $revisions = $product->revisions()->latest()->get();
+
+        return view('merchant.products.show', compact('product', 'revisions'));
     }
 
     public function create()
@@ -42,7 +54,7 @@ class ProductController extends Controller
             $imagePath = $request->file('image')->store('products', 'public');
         }
 
-        Product::create([
+        $product = Product::create([
             'merchant_id' => Auth::user()->merchant->id,
             'name' => $request->name,
             'slug' => Str::slug($request->name) . '-' . uniqid(),
@@ -52,7 +64,6 @@ class ProductController extends Controller
             'status' => 'pending',
         ]);
 
-        // Notifikasi admin saat produk baru diajukan
         $admin = User::where('role', 'admin')->first();
         if ($admin) {
             Notification::create([
@@ -71,6 +82,12 @@ class ProductController extends Controller
     {
         $this->authorizeProduct($product);
 
+        if ($product->status === 'pending' || $product->revisions()->where('status', 'pending')->exists()) {
+            return redirect()
+                ->route('merchant.products.show', $product)
+                ->with('error', 'Produk sedang menunggu persetujuan admin dan tidak dapat diedit.');
+        }
+
         return view('merchant.products.edit', compact('product'));
     }
 
@@ -85,10 +102,9 @@ class ProductController extends Controller
             'image' => 'nullable|image|max:2048',
         ]);
 
-        // Cek apakah sudah ada revisi pending
         if ($product->revisions()->where('status', 'pending')->exists()) {
             return redirect()
-                ->route('merchant.products.index')
+                ->route('merchant.products.show', $product)
                 ->with('error', 'Anda sudah memiliki revisi yang menunggu persetujuan.');
         }
 
@@ -97,8 +113,7 @@ class ProductController extends Controller
             $imagePath = $request->file('image')->store('products', 'public');
         }
 
-        // Simpan revisi
-        $revision = $product->revisions()->create([
+        $product->revisions()->create([
             'name' => $request->name,
             'description' => $request->description,
             'price' => $request->price,
@@ -106,7 +121,6 @@ class ProductController extends Controller
             'status' => 'pending',
         ]);
 
-        // Notifikasi admin saat revisi diajukan
         $admin = User::where('role', 'admin')->first();
         if ($admin) {
             Notification::create([
@@ -117,7 +131,7 @@ class ProductController extends Controller
         }
 
         return redirect()
-            ->route('merchant.products.index')
+            ->route('merchant.products.show', $product)
             ->with('success', 'Revisi produk berhasil diajukan dan menunggu persetujuan admin.');
     }
 

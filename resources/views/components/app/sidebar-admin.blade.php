@@ -107,7 +107,7 @@
                             </span>
                         </a>
                     </li>
-                    <li class="mb-1 last:mb-0">
+                    {{-- <li class="mb-1 last:mb-0">
                         <a @class([
                             'block text-gray-500/90 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 transition truncate',
                             'text-violet-500!' => Route::is('admin.merchants.create')
@@ -116,13 +116,13 @@
                                 Tambah Merchant
                             </span>
                         </a>
-                    </li>
+                    </li> --}}
                 </ul>
             </div>
         </li>
 
         <!-- Persetujuan Produk + Revisi -->
-        <li
+        {{-- <li
             x-data="{ open: {{ Request::is('admin/products*') || Request::is('admin/product-revisions*') ? 'true' : 'false' }} }"
             @class([
                 'pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0 bg-linear-to-r',
@@ -178,6 +178,6 @@
                     </li>
                 </ul>
             </div>
-        </li>
+        </li> --}}
     </ul>
 </div>

@@ -1,40 +1,55 @@
 <x-app-layout>
-<div class="container">
-    <h1 class="mb-4">Edit Merchant</h1>
+    <div class="max-w-xl mx-auto p-6 mt-6 bg-white dark:bg-gray-900 rounded-xl shadow-md">
+        <h1 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6">Update User Merchant</h1>
 
-    <form action="{{ route('admin.merchants.update', $merchant) }}" method="POST">
-        @csrf
-        @method('PUT')
+        <form action="{{ route('admin.merchants.update', $merchant) }}" method="POST" class="space-y-5">
+            @csrf
+            @method('PUT')
 
-        <div class="mb-3">
-            <label>Merchant Name</label>
-            <input type="text" name="name" class="form-control" value="{{ old('name', $merchant->name) }}" required>
-            @error('name') <div class="text-danger">{{ $message }}</div> @enderror
-        </div>
+            <div>
+                <label for="username" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Username</label>
+                <input
+                    type="text"
+                    name="username"
+                    id="username"
+                    class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                    value="{{ old('username', $merchant->user->username ?? '') }}"
+                    required
+                >
+                @error('username')
+                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                @enderror
+            </div>
 
-        <div class="mb-3">
-            <label>Slug</label>
-            <input type="text" name="slug" class="form-control" value="{{ old('slug', $merchant->slug) }}">
-            @error('slug') <div class="text-danger">{{ $message }}</div> @enderror
-        </div>
+            <div>
+                <label for="password" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Password (opsional)</label>
+                <input
+                    type="password"
+                    name="password"
+                    id="password"
+                    class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                    placeholder="Biarkan kosong jika tidak diubah"
+                >
+                @error('password')
+                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                @enderror
+            </div>
 
-        <div class="mb-3">
-            <label>Phone</label>
-            <input type="text" name="phone" class="form-control" value="{{ old('phone', $merchant->phone) }}">
-        </div>
+            <div class="flex justify-start gap-3 pt-4">
+                <button
+                    type="submit"
+                    class="inline-flex items-center px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-md hover:bg-indigo-700 focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                >
+                    Update
+                </button>
 
-        <div class="mb-3">
-            <label>Address</label>
-            <textarea name="address" class="form-control">{{ old('address', $merchant->address) }}</textarea>
-        </div>
-
-        <div class="mb-3 form-check">
-            <input type="checkbox" name="is_active" class="form-check-input" {{ $merchant->is_active ? 'checked' : '' }}>
-            <label class="form-check-label">Active</label>
-        </div>
-
-        <button class="btn btn-primary">Update Merchant</button>
-        <a href="{{ route('admin.merchants.index') }}" class="btn btn-secondary">Cancel</a>
-    </form>
-</div>
+                <a
+                    href="{{ route('admin.merchants.index') }}"
+                    class="inline-flex items-center px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-sm font-medium rounded-md hover:bg-gray-300 dark:hover:bg-gray-600"
+                >
+                    Cancel
+                </a>
+            </div>
+        </form>
+    </div>
 </x-app-layout>

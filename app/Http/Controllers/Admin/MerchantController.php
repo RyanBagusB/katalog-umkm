@@ -80,25 +80,25 @@ class MerchantController extends Controller
     public function update(Request $request, Merchant $merchant)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'slug' => 'nullable|string|unique:merchants,slug,' . $merchant->id,
-            'phone' => 'nullable|string',
-            'address' => 'nullable|string',
-            'is_active' => 'boolean',
+            'username' => 'required|string|max:255|unique:users,username,' . $merchant->user_id,
+            'password' => 'nullable|string|min:8',
         ]);
 
-        $merchant->update([
-            'name' => $request->name,
-            'slug' => $request->slug ? Str::slug($request->slug) : Str::slug($request->name),
-            'phone' => $request->phone,
-            'address' => $request->address,
-            'is_active' => $request->is_active ?? true,
-        ]);
+        $user = $merchant->user;
+
+        $user->username = $request->username;
+
+        if ($request->filled('password')) {
+            $user->password = Hash::make($request->password);
+        }
+
+        $user->save();
 
         return redirect()
             ->route('admin.merchants.index')
-            ->with('success', 'Detail merchant berhasil diperbarui.');
+            ->with('success', 'Akun merchant berhasil diperbarui.');
     }
+
 
     /**
      * Remove the specified merchant from storage.

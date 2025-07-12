@@ -21,6 +21,8 @@ class Merchant extends Model
         'is_active',
         'phone',
         'address',
+        'description',
+        'photo',
     ];
 
     /**

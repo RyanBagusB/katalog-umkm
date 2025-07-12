@@ -61,7 +61,7 @@ class ProductController extends Controller
             'description' => $request->description,
             'price' => $request->price,
             'image' => $imagePath,
-            'status' => 'pending',
+            'status' => 'approved',
         ]);
 
         $admin = User::where('role', 'admin')->first();

@@ -16,7 +16,7 @@
   </div>
 
   {{-- Grid UMKM Dummy --}}
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-screen-xl mx-auto">
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
     @for ($i = 1; $i <= 8; $i++)
       <div class="flex flex-col gap-y-4">
         <img

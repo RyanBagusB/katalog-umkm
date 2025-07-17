@@ -9,27 +9,37 @@ class Merchant extends Model
 {
     use HasFactory;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'user_id',
         'name',
         'slug',
         'is_active',
-        'phone',
-        'address',
-        'description',
-        'photo',
+
+        // Tambahan kolom baru
+        'tagline',
+        'banner_description',
+        'banner_image',
+
+        'feature_1_title',
+        'feature_1_desc',
+        'feature_2_title',
+        'feature_2_desc',
+        'feature_3_title',
+        'feature_3_desc',
+        'feature_4_title',
+        'feature_4_desc',
+
+        'about_description',
+        'about_image',
+
+        'contact_description',
+        'contact_image',
+        'contact_address',
+        'contact_phone',
+        'contact_email',
+        'contact_instagram',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
     protected $casts = [
         'is_active' => 'boolean',
     ];
@@ -39,11 +49,20 @@ class Merchant extends Model
         return 'slug';
     }
 
-    /**
-     * Get the user that owns the merchant.
-     */
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    // Optional: scope untuk memastikan data lengkap
+    public function scopeComplete($query)
+    {
+        return $query->whereNotNull('name')
+            ->whereNotNull('banner_image')
+            ->whereNotNull('banner_description')
+            ->whereNotNull('about_image')
+            ->whereNotNull('about_description')
+            ->whereNotNull('contact_image')
+            ->whereNotNull('contact_description');
     }
 }

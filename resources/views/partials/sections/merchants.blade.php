@@ -13,21 +13,23 @@
   </div>
 
   <!-- Grid UMKM -->
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 max-w-screen-xl mx-auto">
-    @for ($i = 0; $i < 4; $i++)
-      <a href="{{ url('/umkm/' . $i) }}" class="group block">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mx-auto">
+    @forelse ($merchants as $merchant)
+      <a href="{{ route('umkm.show', $merchant) }}" class="group block">
         <div class="flex flex-col gap-y-4">
           <div class="overflow-hidden rounded-2xl shadow-md group-hover:shadow-lg transition duration-300">
             <img
               src="{{ asset('images/auth-image.jpg') }}"
-              alt="UMKM Karangpoh {{ $i + 1 }}"
+              alt="UMKM Karangpoh"
               class="w-full aspect-[6/4] md:aspect-square object-cover transform group-hover:scale-105 transition duration-500"
               loading="lazy"
             />
           </div>
-          <p class="text-lg font-medium text-[#1E1E1E] truncate">UMKM Karangpoh {{ $i + 1 }}</p>
+          <p class="text-lg font-medium text-[#1E1E1E] truncate">{{ $merchant->name }}</p>
         </div>
       </a>
-    @endfor
+    @empty
+      <p>Tidak ada UMKM tersedia saat ini.</p>
+    @endforelse
   </div>
 </section>

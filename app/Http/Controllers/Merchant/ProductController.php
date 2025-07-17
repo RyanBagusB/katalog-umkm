@@ -18,9 +18,6 @@ class ProductController extends Controller
 
         $products = Product::where('merchant_id', $merchant->id)
             ->latest()
-            ->with(['revisions' => function ($q) {
-                $q->latest();
-            }])
             ->paginate(10);
 
         return view('merchant.products.index', compact('products', 'merchant'));
@@ -29,10 +26,7 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         $this->authorizeProduct($product);
-
-        $revisions = $product->revisions()->latest()->get();
-
-        return view('merchant.products.show', compact('product', 'revisions'));
+        return view('merchant.products.show', compact('product'));
     }
 
     public function create()
@@ -61,32 +55,17 @@ class ProductController extends Controller
             'description' => $request->description,
             'price' => $request->price,
             'image' => $imagePath,
-            'status' => 'approved',
+            'status' => 'visible',
         ]);
-
-        $admin = User::where('role', 'admin')->first();
-        if ($admin) {
-            Notification::create([
-                'user_id' => $admin->id,
-                'title' => 'Produk Baru Diajukan',
-                'message' => 'Merchant "' . Auth::user()->name . '" mengajukan produk "' . $request->name . '".',
-            ]);
-        }
 
         return redirect()
             ->route('merchant.products.index')
-            ->with('success', 'Produk berhasil diajukan dan menunggu persetujuan admin.');
+            ->with('success', 'Produk berhasil ditambahkan.');
     }
 
     public function edit(Product $product)
     {
         $this->authorizeProduct($product);
-
-        if ($product->status === 'pending' || $product->revisions()->where('status', 'pending')->exists()) {
-            return redirect()
-                ->route('merchant.products.show', $product)
-                ->with('error', 'Produk sedang menunggu persetujuan admin dan tidak dapat diedit.');
-        }
 
         return view('merchant.products.edit', compact('product'));
     }
@@ -120,15 +99,6 @@ class ProductController extends Controller
             'image' => $imagePath,
             'status' => 'pending',
         ]);
-
-        $admin = User::where('role', 'admin')->first();
-        if ($admin) {
-            Notification::create([
-                'user_id' => $admin->id,
-                'title' => 'Revisi Produk Diajukan',
-                'message' => 'Merchant "' . Auth::user()->name . '" mengajukan revisi produk "' . $product->name . '".',
-            ]);
-        }
 
         return redirect()
             ->route('merchant.products.show', $product)

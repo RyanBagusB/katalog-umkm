@@ -40,7 +40,7 @@
   {{-- Form Kontak dan Gambar --}}
   <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
     {{-- Form Kontak --}}
-    <div class="flex flex-col p-8 bg-[#ECECEC] rounded-[40px] gap-y-4">
+    <div class="flex flex-col p-8 bg-[#ECECEC] rounded-[40px] gap-y-4 aspect-video">
       <h2 class="text-4xl font-semibold flex items-center gap-x-2">
         Hubungi Kami
       </h2>
@@ -60,7 +60,7 @@
 
         <div>
           <label for="pesan" class="block text-sm font-medium">Pesan</label>
-          <textarea id="pesan" name="pesan" rows="8" required
+          <textarea id="pesan" name="pesan" rows="6" required
             class="w-full mt-1 px-4 py-2 rounded-3xl border border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
         </div>
 
@@ -76,7 +76,7 @@
       <img
         src="{{ asset('images/auth-image.jpg') }}"
         alt="Gambar kegiatan UMKM di Kelurahan Karangpoh"
-        class="w-full aspect-video md:aspect-auto h-full object-cover rounded-[40px] shadow"
+        class="w-full h-full object-cover rounded-[40px] shadow aspect-video"
       />
     </div>
   </div>

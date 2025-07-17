@@ -30,13 +30,6 @@
 
             <!-- Header: Right side -->
             <div class="flex items-center space-x-3">
-                {{-- <x-modal-search /> --}}
-                {{-- <x-dropdown-notifications
-                    :userNotifications="$userNotifications"
-                    :unreadNotifications="$unreadNotifications"
-                    align="right"
-                /> --}}
-                {{-- <x-dropdown-help align="right" /> --}}
                 <x-theme-toggle />                
                 <hr class="w-px h-6 bg-gray-200 dark:bg-gray-700/60 border-none" />
                 <x-dropdown-profile align="right" />

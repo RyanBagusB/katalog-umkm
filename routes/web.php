@@ -4,9 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\Merchant\MerchantProfileController;
 
-
-Route::get('/', function () {
-    return view('landing.index');
+Route::prefix('/')->controller(\App\Http\Controllers\GuestController::class)->group(function () {
+    Route::get('/', 'index')->name('home');
+    Route::get('/umkm/{merchant}', 'show')->name('umkm.show');
 });
 
 Route::get('/tentang', function () {
@@ -24,16 +24,6 @@ Route::get('/artikel', function () {
 Route::get('/kontak', function () {
     return view('landing.contact');
 });
-
-Route::get('/umkm/{slug}', function ($slug) {
-    // Dummy data bisa dikirim ke view jika perlu
-    return view('merchants.index', [
-        'slug' => $slug,
-        'nama_usaha' => 'UMKM Karangpoh Sejahtera',
-        'deskripsi' => 'UMKM yang bergerak di bidang kuliner tradisional.',
-        'gambar' => 'images/auth-image.jpg',
-    ]);
-})->name('umkm.show');
 
 // Detail Artikel / Berita
 Route::get('/artikel/{slug}', function ($slug) {

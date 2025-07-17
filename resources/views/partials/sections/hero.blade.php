@@ -14,7 +14,7 @@
   </div>
 
   <!-- Image Grid -->
-  <div class="grid grid-cols-1 lg:grid-cols-2 gap-y-4 md:gap-x-4 max-w-screen-xl mx-auto">
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-y-4 md:gap-x-4 mx-auto">
     <div>
       <img
         src="{{ asset('images/auth-image.jpg') }}"

@@ -64,8 +64,8 @@
 </section>
 
 {{-- Related Articles --}}
-<section class="px-4 sm:px-8 lg:px-16 xl:px-20 pt-12 pb-20 bg-[#F9F9F9]">
-  <div class="max-w-screen-xl mx-auto">
+<section class="px-4 sm:px-8 lg:px-16 xl:px-20 pt-12 pb-20">
+  <div>
     <h2 class="text-2xl sm:text-3xl font-semibold text-[#1E1E1E] mb-8">Berita Terkait</h2>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

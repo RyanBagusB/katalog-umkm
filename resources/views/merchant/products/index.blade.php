@@ -46,24 +46,14 @@
                                         Rp{{ number_format($product->price, 0, ',', '.') }}
                                     </td>
                                     <td class="p-2">
-                                        @if ($product->revisions()->where('status', 'pending')->exists())
-                                            <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-yellow-100 text-yellow-800">
-                                                Pembaruan sedang ditinjau
+                                        @if ($product->status === 'visible')
+                                            <span class="inline-block px-2 py-1 text-xs font-semibold text-green-700 bg-green-100 rounded">
+                                                Ditampilkan
                                             </span>
                                         @else
-                                            @if ($product->status === 'pending')
-                                                <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-yellow-100 text-yellow-800">
-                                                    Menunggu Persetujuan
-                                                </span>
-                                            @elseif ($product->status === 'approved')
-                                                <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800">
-                                                    Ditampilkan
-                                                </span>
-                                            @else
-                                                <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-red-100 text-red-800">
-                                                    Ditolak
-                                                </span>
-                                            @endif
+                                            <span class="inline-block px-2 py-1 text-xs font-semibold text-gray-700 bg-gray-200 rounded">
+                                                Disembunyikan
+                                            </span>
                                         @endif
                                     </td>
                                     <td class="p-2 text-center flex justify-center gap-2">

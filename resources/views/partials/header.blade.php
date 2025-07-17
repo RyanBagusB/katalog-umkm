@@ -1,22 +1,22 @@
-<header class="sticky top-0 left-0 w-full z-50 bg-white shadow-sm">
+<header class="sticky top-0 left-0 w-full z-50 bg-white shadow-sm" role="banner">
   <div class="flex items-center justify-between gap-4 px-4 py-4 sm:px-8 lg:px-16 xl:px-20">
     
     {{-- Logo --}}
-    <a href="{{ url('/') }}" class="text-2xl font-extrabold tracking-tight text-[#1E1E1E] hover:text-black transition-all duration-200 whitespace-nowrap">
-      Karangpoh
+    <a href="{{ url('/') }}" class="text-2xl font-extrabold tracking-tight text-[#1E1E1E] hover:text-black transition-all duration-200 whitespace-nowrap" title="Beranda Katalog UMKM Karangpoh">
+      UMKM Karangpoh
     </a>
 
     {{-- Navigation (Desktop) --}}
-    <nav class="hidden md:flex items-center gap-x-6 text-[15px] font-medium tracking-wide whitespace-nowrap">
-      <a href="{{ url('/') }}" class="hover:text-[#1E1E1E] transition">Beranda</a>
-      <a href="{{ url('/tentang') }}" class="hover:text-[#1E1E1E] transition">Tentang Kami</a>
-      <a href="{{ url('/umkm') }}" class="hover:text-[#1E1E1E] transition">UMKM</a>
-      <a href="{{ url('/artikel') }}" class="hover:text-[#1E1E1E] transition">Artikel</a>
+    <nav class="hidden md:flex items-center gap-x-6 text-[15px] font-medium tracking-wide whitespace-nowrap" role="navigation" aria-label="Navigasi utama">
+      <a href="{{ url('/') }}" class="hover:text-[#1E1E1E] transition" title="Halaman Beranda UMKM Karangpoh">Beranda</a>
+      <a href="{{ url('/tentang') }}" class="hover:text-[#1E1E1E] transition" title="Informasi Tentang Karangpoh">Tentang Kami</a>
+      <a href="{{ url('/umkm') }}" class="hover:text-[#1E1E1E] transition" title="Katalog Produk UMKM Karangpoh">UMKM</a>
+      <a href="{{ url('/artikel') }}" class="hover:text-[#1E1E1E] transition" title="Artikel dan Berita Karangpoh">Artikel</a>
     </nav>
 
     {{-- CTA Button (Desktop) --}}
     <div class="hidden md:block flex-shrink-0">
-      <a href="{{ url('/kontak') }}" class="bg-[#1E1E1E] text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-black transition">
+      <a href="{{ url('/kontak') }}" class="bg-[#1E1E1E] text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-black transition" title="Hubungi Tim UMKM Karangpoh">
         Hubungi Kami
       </a>
     </div>

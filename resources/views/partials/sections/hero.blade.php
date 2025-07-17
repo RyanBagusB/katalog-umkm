@@ -30,18 +30,19 @@
             <img src="{{ asset('images/food/sosis.jpg') }}" alt="Produk lokal UMKM"
                 class="w-full aspect-[16/9] lg:aspect-[7/8] object-cover rounded-2xl sm:rounded-3xl shadow-lg sm:shadow-xl"
                 loading="lazy" />
-            <div class="relative bg-cover bg-center aspect-[16/9] lg:aspect-[7/8] rounded-2xl sm:rounded-3xl p-6 flex flex-col"
-                style="background-image: url('{{ asset('images/food/kue1.webp') }}');">
-                <div class="absolute inset-0 bg-black opacity-50 rounded-2xl sm:rounded-3xl z-10"></div>
-                <div class="relative z-20">
-                    <h2 class="text-4xl font-bold text-white mb-2">140+</h2>
-                    <p class="text-lg text-white mb-4">UMKM Terdaftar</p>
-                    <p class="text-white text-sm leading-relaxed">
-                        UMKM Karangpoh berkembang melalui pelatihan, digitalisasi, dan promosi. Ayo dukung dan cintai
-                        produk lokal!
-                    </p>
-                </div>
-            </div>
+         <div class="relative bg-cover bg-center aspect-[16/9] lg:aspect-[7/8] rounded-2xl sm:rounded-3xl p-6 flex flex-col group"
+     style="background-image: url('{{ asset('images/food/kue1.webp') }}');">
+    <div class="absolute inset-0 bg-black opacity-50 rounded-2xl sm:rounded-3xl group-hover:opacity-60 transition-opacity duration-300"></div>
+    <div class="relative z-20 group-hover:text-yellow-500 transition-colors duration-300">
+        <h2 class="text-4xl font-bold text-white mb-2 group-hover:text-white">140+</h2>
+        <p class="text-lg text-white mb-4 group-hover:text-white">UMKM Terdaftar</p>
+        <p class="text-white text-sm leading-relaxed group-hover:text-white">
+            UMKM Karangpoh berkembang melalui pelatihan, digitalisasi, dan promosi. Ayo dukung dan cintai
+            produk lokal!
+        </p>
+    </div>
+</div>
+
 
 
 

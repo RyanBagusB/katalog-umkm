@@ -32,38 +32,57 @@ class NewsController extends Controller
         if ($request->hasFile('image')) {
             $data['image'] = $request->file('image')->store('news', 'public');
         }
-
         News::create($data);
-
-        return redirect()->route('news.index')->with('success', 'Berita berhasil ditambahkan.');
+        return response()->json(['message' => 'Berita berhasil ditambahkan.']);
+        // return redirect()->route('admin.news.index')->with('success', 'Berita berhasil ditambahkan.');
     }
 
-    public function edit(News $news)
+    // public function edit(News $news)
+    // {
+    //     return view('admin.news.edit', compact('news'));
+    // }
+
+    // public function update(Request $request, News $news)
+    // {
+    //     $request->validate([
+    //         'title' => 'required|string|max:255',
+    //         'deskripsi' => 'required|string',
+    //         'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+    //     ]);
+
+    //     $data = $request->only(['title', 'deskripsi']);
+
+    //     if ($request->hasFile('image')) {
+    //         if ($news->image) {
+    //             Storage::disk('public')->delete($news->image);
+    //         }
+    //         $data['image'] = $request->file('image')->store('news', 'public');
+    //     }
+
+    //     $news->update($data);
+
+    //     return redirect()->route('admin.news.index')->with('success', 'Berita berhasil diperbarui.');
+    // }
+
+     public function edit($id)
     {
-        return view('news.edit', compact('news'));
+        $news = News::findOrFail($id);
+        return response()->json($news);
     }
 
-    public function update(Request $request, News $news)
+    public function update(Request $request, $id)
     {
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'deskripsi' => 'required|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
-
-        $data = $request->only(['title', 'deskripsi']);
-
+        $news = News::findOrFail($id);
+        $news->title = $request->input('title');
+        $news->description = $request->input('description');
         if ($request->hasFile('image')) {
-            if ($news->image) {
-                Storage::disk('public')->delete($news->image);
-            }
-            $data['image'] = $request->file('image')->store('news', 'public');
+            $path = $request->file('image')->store('news_images', 'public');
+            $news->image = $path;
         }
-
-        $news->update($data);
-
-        return redirect()->route('news.index')->with('success', 'Berita berhasil diperbarui.');
+        $news->save();
+        return response()->json(['message' => 'Berita berhasil diperbarui!', 'news' => $news]);
     }
+
 
     public function destroy(News $news)
     {
@@ -72,6 +91,6 @@ class NewsController extends Controller
         }
         $news->delete();
 
-        return redirect()->route('news.index')->with('success', 'Berita berhasil dihapus.');
+        return redirect()->route('admin.news.index')->with('success', 'Berita berhasil dihapus.');
     }
 }

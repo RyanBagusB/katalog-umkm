@@ -121,6 +121,58 @@
             </div>
         </li>
 
+        <li
+    x-data="{ open: {{ Request::is('admin/news*') ? 'true' : 'false' }} }"
+    @class([
+        'pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0 bg-linear-to-r',
+        'from-violet-500/[0.12] dark:from-violet-500/[0.24] to-violet-500/[0.04]' => Request::is('admin/news*')
+    ])
+>
+    <button class="block text-gray-800 dark:text-gray-100 truncate transition hover:text-gray-900 dark:hover:text-white cursor-pointer"
+        @click.prevent="open = !open; sidebarExpanded = true">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center">
+                <svg
+                    @class([
+                        'shrink-0 fill-current',
+                        'text-violet-500' => Request::is('admin/news*'),
+                        'text-gray-400 dark:text-gray-500' => !Request::is('admin/news*'),
+                    ])
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16" height="16"
+                    viewBox="0 0 24 24">
+                    <path d="M3 4h18c1.1 0 1.99.9 1.99 2L21 18c0 1.1-.9 1.99-2 1.99H5c-1.1 0-1.99-.9-1.99-2L3 6c0-1.1.9-2 2-2zm0 14h18V6H3v12zm4-2h2v-2H7v2zm4 0h2v-2h-2v2zm4 0h2v-2h-2v2z"/>
+                </svg>
+                <span class="text-sm font-medium ml-4 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                    News
+                </span>
+            </div>
+            <div class="flex shrink-0 ml-2 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                <svg class="w-3 h-3 shrink-0 ml-1 fill-current text-gray-400 dark:text-gray-500"
+                    :class="open ? 'rotate-180' : 'rotate-0'"
+                    viewBox="0 0 12 12">
+                    <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z"/>
+                </svg>
+            </div>
+        </div>
+    </button>
+    <div class="lg:hidden lg:sidebar-expanded:block 2xl:block">
+        <ul class="pl-8 mt-1" :class="open ? 'block' : 'hidden'">
+            <li class="mb-1 last:mb-0">
+                <a @class([
+                    'block text-gray-500/90 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 transition truncate',
+                    'text-violet-500!' => Route::is('admin.news.index')
+                ]) href="{{ route('admin.news.index') }}">
+                    <span class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                        List News
+                    </span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</li>
+
+
         <!-- Persetujuan Produk + Revisi -->
         {{-- <li
             x-data="{ open: {{ Request::is('admin/products*') || Request::is('admin/product-revisions*') ? 'true' : 'false' }} }"

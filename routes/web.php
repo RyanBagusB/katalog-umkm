@@ -63,7 +63,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::post('product-revisions/{revision}/reject', [\App\Http\Controllers\Admin\ProductRevisionApprovalController::class, 'reject'])
             ->name('product-revisions.reject');
 
-        Route::resource('news', NewsController::class);
+        Route::resource('news', NewsController::class)->name('news', 'admin.news');
     });
 
     Route::middleware(['role:merchant'])->prefix('merchant')->name('merchant.')->group(function () {

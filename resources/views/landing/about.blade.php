@@ -40,7 +40,7 @@
   {{-- Quotation / Mission Section --}}
   <div class="text-center max-w-2xl mx-auto mb-16 sm:mb-24">
     <p class="text-xl md:text-2xl lg:text-3xl font-semibold text-[#1E1E1E] leading-relaxed">
-      Melalui digitalisasi dan publikasi UMKM, Kelurahan Karangpoh mendorong pertumbuhan ekonomi warga. Kami percaya bahwa kolaborasi dan inovasi adalah kunci untuk membangun masa depan UMKM yang lebih kuat, mandiri, dan berdaya saing.
+      Digitalisasi UMKM Karangpoh untuk ekonomi kuat, mandiri, dan berdaya saing.  
     </p>
   </div>
 

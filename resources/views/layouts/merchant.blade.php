@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>@yield('title', 'Merchant - UMKM Karangpoh')</title>
+  <link rel="icon" href="{{ asset('images/logo.png') }}" type="image/x-icon">
+
   <meta name="description" content="@yield('description', 'Halaman merchant untuk UMKM Karangpoh.')">
   @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>

@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>@yield('title', 'Karangpoh - UMKM & Properti')</title>
+  <link rel="icon" href="{{ asset('images/logo.png') }}" type="image/x-icon">
 
   <meta name="description" content="@yield('meta_description', 'Temukan informasi UMKM dan properti terbaik di Karangpoh. Dukungan lokal, layanan terpercaya.')">
   <meta name="keywords" content="Karangpoh, UMKM, properti, bisnis lokal, desa digital">

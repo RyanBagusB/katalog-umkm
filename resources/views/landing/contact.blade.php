@@ -52,13 +52,6 @@
         </div>
 
         <div>
-          <label for="nomor" class="block text-sm font-medium">Nomor HP</label>
-          <input type="tel" id="nomor" name="nomor" required
-            class="w-full mt-1 px-4 py-2 rounded-3xl border border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="08xxxxxxxxxx" />
-        </div>
-
-        <div>
           <label for="pesan" class="block text-sm font-medium">Pesan</label>
           <textarea id="pesan" name="pesan" rows="6" required
             class="w-full mt-1 px-4 py-2 rounded-3xl border border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
@@ -82,21 +75,18 @@
   </div>
 </section>
 
-{{-- Script Kirim ke WhatsApp --}}
 <script>
   function sendToWhatsApp(event) {
     event.preventDefault();
 
     const nama = document.getElementById('nama').value.trim();
-    const nomor = document.getElementById('nomor').value.trim();
     const pesan = document.getElementById('pesan').value.trim();
 
     const tujuan = '6281234567890';
 
     const text = `*Formulir Kontak UMKM Karangpoh*\n\n` +
-                 `👤 Nama: ${nama}\n` +
-                 `📞 Nomor HP: ${nomor}\n` +
-                 `💬 Pesan:\n${pesan}`;
+                 `Assalamualaikum bapak/ibu admin Nama saya : ${nama}\n` +
+                 `Ingin menghubungi admin UMKM Karangpoh untuk :\n${pesan}`;
 
     const encoded = encodeURIComponent(text);
     const waUrl = `https://wa.me/${tujuan}?text=${encoded}`;

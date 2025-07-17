@@ -6,7 +6,7 @@
 @section('content')
   @include('partials.sections.hero')
   @include('partials.sections.service')
-  @include('partials.sections.merchants')
+  @include('partials.sections.merchants', ['merchants' => $merchants])
   @include('partials.sections.articles')
   @include('partials.sections.call-to-action')
 @endsection

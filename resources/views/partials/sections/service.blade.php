@@ -7,7 +7,7 @@
   </div>
 
   <!-- Services Grid -->
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-screen-xl">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
     <!-- Item 1 -->
     <div class="flex flex-col gap-y-6">
       <div class="flex flex-col gap-y-1">

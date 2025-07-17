@@ -11,7 +11,7 @@
   </div>
 
   <!-- Content Grid -->
-  <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 max-w-screen-xl mx-auto">
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mx-auto">
     <!-- Left Featured Article -->
     <a href="{{ url('/artikel/unggulan') }}" class="group block">
       <div class="flex flex-col gap-y-4">

@@ -1,5 +1,5 @@
 <section class="px-4 sm:px-8 lg:px-16 xl:px-20 py-20 bg-white">
-  <div class="flex flex-col lg:flex-row gap-4 items-stretch max-w-screen-xl mx-auto">
+  <div class="flex flex-col lg:flex-row gap-4 items-stretch mx-auto">
     
     <!-- CTA Box -->
     <div class="lg:w-1/2 flex flex-col bg-[#ECECEC] rounded-[40px] px-6 sm:px-10 py-12 sm:py-16">

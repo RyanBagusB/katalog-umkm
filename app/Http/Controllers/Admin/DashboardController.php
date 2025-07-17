@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller; // TAMBAHKAN BARIS INI
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\DataFeed;
 use Illuminate\Support\Facades\DB;
@@ -11,9 +11,6 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $dataFeed = new DataFeed();
-        // dd($dataFeed); 
-        // $newsTotal = DB::table('news')->count();
         $merchantsTotal = DB::table('users')
             ->where('role', 'merchant')    
             ->count();
@@ -27,7 +24,7 @@ class DashboardController extends Controller
             ->orderBy('created_at', 'desc')
             ->take(5)
             ->get();
-        return view('admin.dashboard.dashboard', compact('dataFeed', 'merchantsTotal', 'productsTotal', 'productNewer', 'merchNewer'));
+        return view('admin.dashboard.dashboard', compact('merchantsTotal', 'productsTotal', 'productNewer', 'merchNewer'));
     }
 
     public function analytics()

@@ -12,17 +12,30 @@ use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use Laravel\Fortify\Fortify;
+use Laravel\Fortify\Contracts\LoginResponse;
 
 class FortifyServiceProvider extends ServiceProvider
 {
     /**
      * Register any application services.
      */
+
     public function register(): void
     {
-        //
-    }
+        $this->app->singleton(LoginResponse::class, function () {
+            return new class implements LoginResponse {
+                public function toResponse($request)
+                {
+                    $user = $request->user();
 
+                    return match ($user->role) {
+                        'admin' => redirect()->route('admin.dashboard'),
+                        'merchant' => redirect()->route('merchant.dashboard'),
+                    };
+                }
+            };
+        });
+    }
     /**
      * Bootstrap any application services.
      */

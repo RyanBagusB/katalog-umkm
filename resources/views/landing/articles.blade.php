@@ -16,7 +16,7 @@
   </div>
 
   {{-- Konten Berita Grid --}}
-  <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 max-w-screen-xl mx-auto">
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
     {{-- Berita Unggulan --}}
     <div class="flex flex-col gap-y-4">
       <img

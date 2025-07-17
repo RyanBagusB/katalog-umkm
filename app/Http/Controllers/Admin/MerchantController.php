@@ -21,14 +21,6 @@ class MerchantController extends Controller
     }
 
     /**
-     * Show the form for creating a new merchant.
-     */
-    public function create()
-    {
-        return view('admin.merchants.create');
-    }
-
-    /**
      * Store a newly created merchant user and merchant record in storage.
      */
     public function store(Request $request)
@@ -45,33 +37,17 @@ class MerchantController extends Controller
         ]);
 
         Merchant::create([
-            'user_id' => $user->id,
-            'name' => null,
-            'slug' => Str::slug($request->username),
-            'phone' => null,
-            'address' => null,
+            'user_id'   => $user->id,
+            'name'      => null,
+            'slug'      => Str::slug($request->username),
+            'phone'     => null,
+            'address'   => null,
             'is_active' => true,
         ]);
 
         return redirect()
             ->route('admin.merchants.index')
-            ->with('success', 'Akun merchant berhasil dibuat. Silakan lengkapi detail merchant.');
-    }
-
-    /**
-     * Display the specified merchant.
-     */
-    public function show(Merchant $merchant)
-    {
-        return view('admin.merchants.show', compact('merchant'));
-    }
-
-    /**
-     * Show the form for editing the specified merchant.
-     */
-    public function edit(Merchant $merchant)
-    {
-        return view('admin.merchants.edit', compact('merchant'));
+            ->with('success', 'Merchant account created successfully.');
     }
 
     /**
@@ -80,35 +56,42 @@ class MerchantController extends Controller
     public function update(Request $request, Merchant $merchant)
     {
         $request->validate([
-            'username' => 'required|string|max:255|unique:users,username,' . $merchant->user_id,
-            'password' => 'nullable|string|min:8',
+            'username'   => 'required|string|max:255|unique:users,username,' . $merchant->user_id,
+            'password'   => 'nullable|string|min:6',
+            'is_active'  => 'required|boolean',
+            'name'       => 'nullable|string|max:255',
         ]);
 
         $user = $merchant->user;
 
+        // Update user info
         $user->username = $request->username;
-
         if ($request->filled('password')) {
             $user->password = Hash::make($request->password);
         }
-
         $user->save();
+
+        // Update merchant info
+        $merchant->name = $request->name;
+        $merchant->slug = Str::slug($merchant->name ?: $user->username);
+        $merchant->is_active = $request->boolean('is_active');
+        $merchant->save();
 
         return redirect()
             ->route('admin.merchants.index')
-            ->with('success', 'Akun merchant berhasil diperbarui.');
+            ->with('success', 'Merchant updated successfully.');
     }
-
 
     /**
      * Remove the specified merchant from storage.
      */
     public function destroy(Merchant $merchant)
     {
+        // Delete the related user (cascade)
         $merchant->user->delete();
 
         return redirect()
             ->route('admin.merchants.index')
-            ->with('success', 'Merchant berhasil dihapus.');
+            ->with('success', 'Merchant deleted successfully.');
     }
 }

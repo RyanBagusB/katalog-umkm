@@ -17,12 +17,29 @@ class GuestController extends Controller
 
     public function show(Merchant $merchant)
     {
-        // pakai scope juga untuk cek
         if (! Merchant::complete()->where('id', $merchant->id)->exists()) {
             abort(404);
         }
 
-        return view('merchants.index', compact('merchant'));
+        $products = $merchant->products()->get();
+
+        return view('merchants.index', compact('merchant', 'products'));
+    }
+
+    public function allProducts(Merchant $merchant)
+    {
+        $merchant->load('products');
+
+        return view('merchants.products', compact('merchant'));
+    }
+
+    public function contact(Merchant $merchant)
+    {
+        if (!Merchant::complete()->where('id', $merchant->id)->exists()) {
+            abort(404);
+        }
+
+        return view('merchants.contact', compact('merchant'));
     }
 
     public function create() { /* … */ }

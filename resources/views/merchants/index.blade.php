@@ -8,7 +8,7 @@
 {{-- Hero Section --}}
 <section class="relative bg-white text-black">
   <div class="absolute inset-0">
-    <img src="{{ $merchant->banner_image }}" alt="{{ $merchant->name }} Banner" class="w-full h-full object-cover object-center" />
+    <img src="{{ asset('storage/' . $merchant->banner_image) }}" alt="{{ $merchant->name }} Banner" class="w-full h-full object-cover object-center" />
     <div class="absolute inset-0 bg-black/50"></div>
   </div>
   <div class="relative z-10 px-4 sm:px-8 lg:px-16 xl:px-20 py-24 min-h-screen flex flex-col justify-center text-white">
@@ -19,7 +19,7 @@
       <p class="text-lg sm:text-xl text-white/90 mb-8">
         {{ $merchant->banner_description }}
       </p>
-      <a href="#produk" class="inline-block bg-white text-black font-semibold px-6 py-3 rounded-lg shadow hover:bg-gray-100 transition">
+      <a href="{{ route('merchants.products', $merchant->slug) }}" class="inline-block bg-white text-black font-semibold px-6 py-3 rounded-lg shadow hover:bg-gray-100 transition">
         Jelajahi Produk Kami
       </a>
     </div>
@@ -68,25 +68,33 @@
 </section>
 
 {{-- Produk --}}
-{{-- <section id="produk" class="bg-white py-16 px-4 sm:px-8 lg:px-16 xl:px-20">
+<section id="produk" class="bg-white py-16 px-4 sm:px-8 lg:px-16 xl:px-20">
   <div class="max-w-6xl mx-auto">
     <h2 class="text-3xl font-bold text-center text-deepgreen mb-12">Produk Unggulan</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      @foreach ($merchant->products as $product)
-        <div class="bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition">
-          <img src="{{ $product->photo }}" alt="{{ $product->name }}" class="w-full aspect-square object-cover rounded-t-xl">
-          <div class="p-4">
-            <h3 class="font-semibold text-lg text-deepgreen mb-1">{{ $product->name }}</h3>
-            <p class="text-sm text-gray-500 mb-2">Rp{{ number_format($product->price, 0, ',', '.') }}</p>
-            <p class="text-sm text-gray-600 leading-relaxed">
-              {{ $product->description }}
-            </p>
+
+    @if ($merchant->products->isEmpty())
+      <div class="text-center text-gray-500 text-lg py-12">
+        UMKM ini belum menambahkan produk apa pun.
+      </div>
+    @else
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        @foreach ($merchant->products as $product)
+          <div class="bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition">
+            <img src="{{ $product->image_url }}" alt="{{ $product->name }}" class="w-full aspect-square object-cover rounded-t-xl">
+            <div class="p-4">
+              <h3 class="font-semibold text-lg text-deepgreen mb-1">{{ $product->name }}</h3>
+              <p class="text-sm text-gray-500 mb-2">Rp{{ number_format($product->price, 0, ',', '.') }}</p>
+              <p class="text-sm text-gray-600 leading-relaxed">
+                {{ $product->description }}
+              </p>
+            </div>
           </div>
-        </div>
-      @endforeach
-    </div>
+        @endforeach
+      </div>
+    @endif
+
   </div>
-</section> --}}
+</section>
 
 {{-- Cerita --}}
 <section class="bg-white py-16 px-4 sm:px-8 lg:px-16 xl:px-20">
@@ -101,7 +109,7 @@
     </div>
     <div class="h-full">
       <img 
-        src="{{ $merchant->about_image }}" 
+        src="{{ asset('storage/' . $merchant->about_image) }}" 
         alt="Tentang {{ $merchant->name }}" 
         class="rounded-2xl shadow-md object-cover aspect-[7/8] w-full h-full"
         loading="lazy"
@@ -115,7 +123,7 @@
   <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
     <div class="h-full">
       <img 
-        src="{{ $merchant->contact_image }}" 
+        src="{{ asset('storage/' . $merchant->contact_image) }}" 
         alt="Kontak {{ $merchant->name }}" 
         class="rounded-2xl shadow-md object-cover aspect-[7/8] w-full h-full"
         loading="lazy"

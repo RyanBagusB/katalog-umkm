@@ -29,20 +29,9 @@ class Product extends Model
         return $this->belongsTo(Merchant::class);
     }
 
-    public function scopeApproved($query)
-    {
-        return $query->where('status', 'approved');
-    }
-
-
     public function getImageUrlAttribute()
     {
         return $this->image ? asset('storage/' . $this->image) : null;
-    }
-    
-    public function revisions()
-    {
-        return $this->hasMany(ProductRevision::class);
     }
 
     public function getRouteKeyName()

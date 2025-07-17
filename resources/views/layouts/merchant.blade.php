@@ -11,27 +11,38 @@
 </head>
 <body class="bg-white text-gray-800 flex flex-col min-h-screen">
 
-  {{-- Header --}}
+  {{-- Header khusus UMKM --}}
   <header class="sticky top-0 left-0 w-full z-50 bg-white shadow-sm" role="banner">
-    <div class="flex items-center justify-between gap-4 px-4 py-4 sm:px-8 lg:px-16 xl:px-20">
+    <div class="flex md:grid justify-between md:[grid-template-columns:1fr_auto_1fr] items-center gap-4 px-4 py-4 sm:px-8 lg:px-16 xl:px-20">
       
-      {{-- Logo --}}
-      <a href="{{ url('/') }}" class="text-2xl font-extrabold tracking-tight text-[#1E1E1E] hover:text-black transition duration-200 whitespace-nowrap" title="Beranda Katalog UMKM Karangpoh">
-        UMKM Karangpoh
+      {{-- Logo UMKM --}}
+      <a href="{{ route('merchants.show', $merchant->slug) }}"
+        class="text-2xl font-extrabold tracking-tight text-[#1E1E1E] hover:text-black transition duration-200 whitespace-nowrap"
+        title="Beranda {{ $merchant->name }}">
+        {{ $merchant->name }}
       </a>
 
       {{-- Navigation (Desktop) --}}
-      <nav class="hidden md:flex items-center gap-x-6 text-[15px] font-medium tracking-wide whitespace-nowrap" role="navigation" aria-label="Navigasi utama">
-        <a href="{{ url('/') }}" class="hover:text-[#1E1E1E] transition">Beranda</a>
-        <a href="{{ url('/tentang') }}" class="hover:text-[#1E1E1E] transition">Tentang Kami</a>
-        <a href="{{ url('/umkm') }}" class="hover:text-[#1E1E1E] transition">UMKM</a>
-        <a href="{{ url('/artikel') }}" class="hover:text-[#1E1E1E] transition">Artikel</a>
+      <nav class="hidden md:flex items-center gap-x-6 text-[15px] font-medium tracking-wide whitespace-nowrap justify-center"
+          role="navigation" aria-label="Navigasi utama UMKM">
+        {{-- Beranda UMKM --}}
+        <a href="{{ route('merchants.show', $merchant->slug) }}"
+          class="hover:text-[#1E1E1E] transition">
+          Beranda
+        </a>
+
+        {{-- Seluruh Produk --}}
+        <a href="{{ route('merchants.products', $merchant->slug) }}"
+          class="hover:text-[#1E1E1E] transition">
+          Semua Produk
+        </a>
       </nav>
 
       {{-- CTA Button (Desktop) --}}
-      <div class="hidden md:block">
-        <a href="{{ url('/kontak') }}" class="bg-[#1E1E1E] text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-black transition">
-          Hubungi Kami
+      <div class="hidden md:flex justify-end">
+        <a href="{{ route('merchants.contact', $merchant->slug) }}"
+          class="bg-[#1E1E1E] text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-black transition">
+          Kontak Kami
         </a>
       </div>
 
@@ -39,7 +50,7 @@
       <div class="md:hidden">
         <button id="mobileMenuButton" class="p-2 text-[#1E1E1E] focus:outline-none" aria-label="Buka menu navigasi">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2"
-               viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+              viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
             <path d="M4 6h16M4 12h16M4 18h16"/>
           </svg>
         </button>
@@ -50,13 +61,22 @@
   {{-- Mobile Menu --}}
   <nav id="mobileMenu" class="fixed top-[64px] inset-x-0 hidden bg-white shadow-md md:hidden transition-all duration-300">
     <ul class="flex flex-col gap-y-3 py-5 text-[15px] font-medium tracking-wide text-[#1E1E1E] px-4 sm:px-6">
-      <li><a href="{{ url('/') }}" class="block px-4 py-2 rounded hover:bg-[#F5F5F5]">Beranda</a></li>
-      <li><a href="{{ url('/tentang') }}" class="block px-4 py-2 rounded hover:bg-[#F5F5F5]">Tentang Kami</a></li>
-      <li><a href="{{ url('/umkm') }}" class="block px-4 py-2 rounded hover:bg-[#F5F5F5]">UMKM</a></li>
-      <li><a href="{{ url('/artikel') }}" class="block px-4 py-2 rounded hover:bg-[#F5F5F5]">Artikel</a></li>
+      <li>
+        <a href="{{ route('merchants.show', $merchant->slug) }}"
+          class="block px-4 py-2 rounded hover:bg-[#F5F5F5]">
+          Beranda
+        </a>
+      </li>
+      <li>
+        <a href="{{ route('merchants.products', $merchant->slug) }}"
+          class="block px-4 py-2 rounded hover:bg-[#F5F5F5]">
+          Semua Produk
+        </a>
+      </li>
       <li class="pt-2 px-4">
-        <a href="{{ url('/kontak') }}" class="block w-full text-center bg-[#1E1E1E] text-white px-4 py-2.5 rounded-full hover:bg-black transition-all duration-200">
-          Hubungi Kami
+        <a href="{{ route('merchants.contact', $merchant->slug) }}"
+          class="block w-full text-center bg-[#1E1E1E] text-white px-4 py-2.5 rounded-full hover:bg-black transition-all duration-200">
+          Kontak Kami
         </a>
       </li>
     </ul>

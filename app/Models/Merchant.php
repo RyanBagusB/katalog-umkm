@@ -15,7 +15,6 @@ class Merchant extends Model
         'slug',
         'is_active',
 
-        // Tambahan kolom baru
         'tagline',
         'banner_description',
         'banner_image',
@@ -52,6 +51,11 @@ class Merchant extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
     }
 
     // Optional: scope untuk memastikan data lengkap

@@ -15,7 +15,7 @@
   <!-- Grid UMKM -->
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mx-auto">
     @forelse ($merchants as $merchant)
-      <a href="{{ route('umkm.show', $merchant) }}" class="group block">
+      <a href="{{ route('merchants.show', $merchant) }}" class="group block">
         <div class="flex flex-col gap-y-4">
           <div class="overflow-hidden rounded-2xl shadow-md group-hover:shadow-lg transition duration-300">
             <img

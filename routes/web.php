@@ -6,7 +6,9 @@ use App\Http\Controllers\Merchant\MerchantProfileController;
 
 Route::prefix('/')->controller(\App\Http\Controllers\GuestController::class)->group(function () {
     Route::get('/', 'index')->name('home');
-    Route::get('/umkm/{merchant}', 'show')->name('umkm.show');
+    Route::get('/umkm/{merchant}', 'show')->name('merchants.show');
+    Route::get('/umkm/{merchant}/produk', 'allProducts')->name('merchants.products');
+    Route::get('/umkm/{merchant}/kontak', 'contact')->name('merchants.contact');
 });
 
 Route::get('/tentang', function () {

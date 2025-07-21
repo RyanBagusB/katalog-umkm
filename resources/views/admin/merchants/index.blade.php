@@ -46,7 +46,7 @@
                                         <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-200 text-gray-800">Nonaktif</span>
                                     @endif
                                 </td>
-                                <td class="p-2 text-center flex justify-center gap-2">
+                                <td class="p-2 text-center flex justify-center gap-2" x-data="{ showDeleteModal: false }">
 
                                     {{-- Edit Button --}}
                                     <button @click="openEditModalId = {{ $merchant->id }}"
@@ -57,14 +57,41 @@
                                         Edit
                                     </button>
 
-                                    {{-- Delete Button --}}
-                                    <form action="{{ route('admin.merchants.destroy', $merchant) }}" method="POST" onsubmit="return confirm('Are you sure?')">
-                                        @csrf @method('DELETE')
-                                        <button type="submit"
-                                            class="btn bg-white border-gray-200 text-red-600 hover:bg-red-100 dark:bg-gray-800 dark:text-red-400 dark:hover:bg-gray-700">
-                                            Delete
-                                        </button>
-                                    </form>
+                                    {{-- Delete Button (Trigger) --}}
+                                    <button type="button"
+                                        @click="showDeleteModal = true"
+                                        class="btn bg-white border-gray-200 text-red-600 hover:bg-red-100 dark:bg-gray-800 dark:text-red-400 dark:hover:bg-gray-700">
+                                        Delete
+                                    </button>
+
+                                    <!-- Modal -->
+                                    <div x-show="showDeleteModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 text-start"
+                                        x-cloak
+                                        x-transition.opacity>
+                                        <div @click.away="showDeleteModal = false"
+                                            class="bg-white dark:bg-gray-800 rounded-xl shadow-xl p-6 w-full max-w-md"
+                                            x-transition>
+                                            <h2 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-4">Konfirmasi Hapus</h2>
+                                            <p class="text-sm text-gray-600 dark:text-gray-300 mb-6">
+                                                Apakah kamu yakin ingin menghapus <span class="font-medium text-gray-800 dark:text-white">{{ $merchant->name }}</span>?
+                                                Tindakan ini tidak dapat dibatalkan.
+                                            </p>
+                                            <div class="flex justify-end gap-3">
+                                                <button type="button"
+                                                    @click="showDeleteModal = false"
+                                                    class="px-4 py-2 rounded-lg bg-gray-200 text-gray-800 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600">
+                                                    Batal
+                                                </button>
+                                                <form action="{{ route('admin.merchants.destroy', $merchant) }}" method="POST">
+                                                    @csrf @method('DELETE')
+                                                    <button type="submit"
+                                                        class="px-4 py-2 rounded-lg bg-red-600 text-white hover:bg-red-700">
+                                                        Hapus
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </td>
                             </tr>
 

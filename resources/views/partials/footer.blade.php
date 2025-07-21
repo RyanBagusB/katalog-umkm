@@ -4,7 +4,7 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
       <!-- Logo & Deskripsi -->
       <div class="sm:col-span-2 lg:col-span-1">
-        <a href="{{ url('/') }}" class="text-2xl font-bold tracking-wide text-white">Karangpoh</a>
+        <a href="{{ route('home') }}" class="text-2xl font-bold tracking-wide text-white">Karangpoh</a>
         <p class="text-sm text-white mt-4 leading-relaxed max-w-sm">
           Menghubungkan Anda dengan properti impian dan solusi UMKM terbaik di sekitar Anda. Kami berkomitmen menghadirkan layanan profesional dan terpercaya.
         </p>
@@ -14,11 +14,31 @@
       <div>
         <h4 class="text-base font-semibold mb-4">Navigasi</h4>
         <ul class="flex flex-col gap-2">
-          <li><a href="{{ url('/') }}" class="text-sm text-gray-300 hover:text-white transition">Beranda</a></li>
-          <li><a href="{{ url('/tentang') }}" class="text-sm text-gray-300 hover:text-white transition">Tentang Kami</a></li>
-          <li><a href="{{ url('/umkm') }}" class="text-sm text-gray-300 hover:text-white transition">UMKM</a></li>
-          <li><a href="{{ url('/artikel') }}" class="text-sm text-gray-300 hover:text-white transition">Artikel</a></li>
-          <li><a href="{{ url('/kontak') }}" class="text-sm text-gray-300 hover:text-white transition">Kontak</a></li>
+          <li>
+            <a href="{{ route('home') }}" class="text-sm text-gray-300 hover:text-white transition">
+              Beranda
+            </a>
+          </li>
+          <li>
+            <a href="{{ route('about') }}" class="text-sm text-gray-300 hover:text-white transition">
+              Tentang Kami
+            </a>
+          </li>
+          <li>
+            <a href="{{ route('merchants.list') }}" class="text-sm text-gray-300 hover:text-white transition">
+              UMKM
+            </a>
+          </li>
+          <li>
+            <a href="{{ route('news.index') }}" class="text-sm text-gray-300 hover:text-white transition">
+              Berita
+            </a>
+          </li>
+          <li>
+            <a href="{{ route('contact') }}" class="text-sm text-gray-300 hover:text-white transition">
+              Kontak
+            </a>
+          </li>
         </ul>
       </div>
 

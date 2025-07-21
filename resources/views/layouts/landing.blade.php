@@ -12,7 +12,7 @@
   <meta name="robots" content="index, follow">
 
   <link rel="canonical" href="{{ url()->current() }}">
-  <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}"/>
+  <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}"/>
 
   <!-- Vite -->
   @vite(['resources/css/app.css', 'resources/js/app.js'])

@@ -19,7 +19,7 @@
         <div class="flex flex-col gap-y-4">
           <div class="overflow-hidden rounded-2xl shadow-md group-hover:shadow-lg transition duration-300">
             <img
-              src="{{ asset('images/auth-image.jpg') }}"
+              src="{{ $merchant->banner_image ? asset('storage/'.$merchant->banner_image) : asset('images/default-merchant.jpg') }}"
               alt="UMKM Karangpoh"
               class="w-full aspect-[6/4] md:aspect-square object-cover transform group-hover:scale-105 transition duration-500"
               loading="lazy"

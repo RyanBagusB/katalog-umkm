@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>@yield('title', 'Merchant - UMKM Karangpoh')</title>
+  <title>@yield('title', $merchant->name . ' - UMKM Karangpoh')</title>
   <link rel="icon" href="{{ asset('images/logo.png') }}" type="image/x-icon">
 
-  <meta name="description" content="@yield('description', 'Halaman merchant untuk UMKM Karangpoh.')">
+  <meta name="description" content="@yield('description', 'Profil UMKM ' . $merchant->name . ' dari Karangpoh.')">
   @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-white text-gray-800 flex flex-col min-h-screen">
@@ -25,30 +25,22 @@
       {{-- Navigation (Desktop) --}}
       <nav class="hidden md:flex items-center gap-x-6 text-[15px] font-medium tracking-wide whitespace-nowrap justify-center"
           role="navigation" aria-label="Navigasi utama UMKM">
-        {{-- Beranda UMKM --}}
-        <a href="{{ route('merchants.show', $merchant->slug) }}"
-          class="hover:text-[#1E1E1E] transition">
-          Beranda
-        </a>
-
-        {{-- Seluruh Produk --}}
-        <a href="{{ route('merchants.products', $merchant->slug) }}"
-          class="hover:text-[#1E1E1E] transition">
-          Semua Produk
-        </a>
+        <a href="{{ route('merchants.show', $merchant->slug) }}" class="hover:text-[#1E1E1E] transition">Beranda</a>
+        <a href="{{ route('merchants.products', $merchant->slug) }}" class="hover:text-[#1E1E1E] transition">Semua Produk</a>
+        <a href="{{ route('merchants.contact', $merchant->slug) }}" class="hover:text-[#1E1E1E] transition">Kontak</a>
       </nav>
 
       {{-- CTA Button (Desktop) --}}
       <div class="hidden md:flex justify-end">
         <a href="{{ route('merchants.contact', $merchant->slug) }}"
           class="bg-[#1E1E1E] text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-black transition">
-          Kontak Kami
+          Hubungi Kami
         </a>
       </div>
 
       {{-- Mobile Menu Button --}}
       <div class="md:hidden">
-        <button id="mobileMenuButton" class="p-2 text-[#1E1E1E] focus:outline-none" aria-label="Buka menu navigasi">
+        <button id="mobileMenuButton" class="p-2 text-[#1E1E1E]" aria-label="Buka menu navigasi">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2"
               viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
             <path d="M4 6h16M4 12h16M4 18h16"/>
@@ -61,23 +53,10 @@
   {{-- Mobile Menu --}}
   <nav id="mobileMenu" class="fixed top-[64px] inset-x-0 hidden bg-white shadow-md md:hidden transition-all duration-300">
     <ul class="flex flex-col gap-y-3 py-5 text-[15px] font-medium tracking-wide text-[#1E1E1E] px-4 sm:px-6">
-      <li>
-        <a href="{{ route('merchants.show', $merchant->slug) }}"
-          class="block px-4 py-2 rounded hover:bg-[#F5F5F5]">
-          Beranda
-        </a>
-      </li>
-      <li>
-        <a href="{{ route('merchants.products', $merchant->slug) }}"
-          class="block px-4 py-2 rounded hover:bg-[#F5F5F5]">
-          Semua Produk
-        </a>
-      </li>
+      <li><a href="{{ route('merchants.show', $merchant->slug) }}" class="block px-4 py-2 rounded hover:bg-[#F5F5F5]">Beranda</a></li>
+      <li><a href="{{ route('merchants.products', $merchant->slug) }}" class="block px-4 py-2 rounded hover:bg-[#F5F5F5]">Semua Produk</a></li>
       <li class="pt-2 px-4">
-        <a href="{{ route('merchants.contact', $merchant->slug) }}"
-          class="block w-full text-center bg-[#1E1E1E] text-white px-4 py-2.5 rounded-full hover:bg-black transition-all duration-200">
-          Kontak Kami
-        </a>
+        <a href="{{ route('merchants.contact', $merchant->slug) }}" class="block w-full text-center bg-[#1E1E1E] text-white px-4 py-2.5 rounded-full hover:bg-black transition-all duration-200">Hubungi Kami</a>
       </li>
     </ul>
   </nav>
@@ -90,14 +69,13 @@
   {{-- Footer --}}
   <footer class="bg-[#1E1E1E] text-white px-4 sm:px-8 lg:px-16 xl:px-20 py-8">
     <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-      
       {{-- Brand & Deskripsi --}}
       <div class="sm:col-span-2 lg:col-span-1">
-        <a href="{{ url('/') }}" class="text-2xl font-extrabold tracking-wide text-white">
-          Karangpoh
+        <a href="{{ route('merchants.show', $merchant->slug) }}" class="text-2xl font-extrabold tracking-wide text-white">
+          {{ $merchant->name }}
         </a>
         <p class="mt-4 text-sm text-gray-300 leading-relaxed max-w-sm">
-          Menghubungkan Anda dengan properti impian dan solusi UMKM terbaik di sekitar Anda. Kami berkomitmen menghadirkan layanan profesional dan terpercaya.
+          Profil resmi UMKM {{ $merchant->name }}. Temukan produk lokal berkualitas dan hubungi kami untuk kerjasama.
         </p>
       </div>
 
@@ -105,11 +83,9 @@
       <div>
         <h4 class="text-base font-semibold mb-4">Navigasi</h4>
         <ul class="space-y-2 text-sm">
-          <li><a href="{{ url('/') }}" class="text-gray-300 hover:text-white transition">Beranda</a></li>
-          <li><a href="{{ url('/tentang') }}" class="text-gray-300 hover:text-white transition">Tentang Kami</a></li>
-          <li><a href="{{ url('/umkm') }}" class="text-gray-300 hover:text-white transition">UMKM</a></li>
-          <li><a href="{{ url('/artikel') }}" class="text-gray-300 hover:text-white transition">Artikel</a></li>
-          <li><a href="{{ url('/kontak') }}" class="text-gray-300 hover:text-white transition">Kontak</a></li>
+          <li><a href="{{ route('merchants.show', $merchant->slug) }}" class="text-gray-300 hover:text-white transition">Beranda</a></li>
+          <li><a href="{{ route('merchants.products', $merchant->slug) }}" class="text-gray-300 hover:text-white transition">Semua Produk</a></li>
+          <li><a href="{{ route('merchants.contact', $merchant->slug) }}" class="text-gray-300 hover:text-white transition">Kontak</a></li>
         </ul>
       </div>
 
@@ -117,20 +93,18 @@
       <div>
         <h4 class="text-base font-semibold mb-4">Kontak</h4>
         <ul class="space-y-2 text-sm text-gray-300">
-          <li>Karangpoh, Tegalrejo, Magelang</li>
-          <li>Telp: 0821-0000-0000</li>
-          <li>Email: info@karangpoh.com</li>
+          @if($merchant->contact_address)<li>{{ $merchant->contact_address }}</li>@endif
+          @if($merchant->contact_phone)<li>Telp: {{ $merchant->contact_phone }}</li>@endif
+          @if($merchant->contact_email)<li>Email: {{ $merchant->contact_email }}</li>@endif
         </ul>
       </div>
     </div>
 
-    {{-- Copyright --}}
     <div class="mt-12 border-t border-white/10 pt-6 text-sm text-center text-gray-400">
-      © {{ date('Y') }} Karangpoh. Semua hak dilindungi.
+      © {{ date('Y') }} {{ $merchant->name }}. Semua hak dilindungi.
     </div>
   </footer>
 
-  {{-- Script: Toggle Mobile Menu --}}
   <script>
     document.getElementById('mobileMenuButton').addEventListener('click', function () {
       const menu = document.getElementById('mobileMenu');

@@ -1,8 +1,7 @@
 @extends('layouts.landing')
 
-@section('title', 'Kontak & Informasi - Katalog UMKM Karangpoh')
-@section('description', 'Hubungi Kelurahan Karangpoh untuk informasi lebih lanjut mengenai program UMKM, promosi produk
-    lokal, dan layanan digital katalog UMKM.')
+@section('title', 'Kontak & Informasi – Katalog UMKM Kelurahan Karangpoh')
+@section('description', 'Hubungi Kelurahan Karangpoh untuk informasi lebih lanjut mengenai program UMKM, promosi produk lokal, dan layanan katalog digital UMKM.')
 
 @section('content')
     <section class="px-4 md:px-8 lg:px-16 xl:px-20 py-10 md:py-16">

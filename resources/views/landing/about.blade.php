@@ -1,8 +1,7 @@
 @extends('layouts.landing')
 
-@section('title', 'Tentang Kami - Katalog UMKM Kelurahan Karangpoh')
-@section('description', 'Halaman resmi tentang inisiatif Kelurahan Karangpoh dalam mendukung dan memajukan pelaku UMKM
-    lokal melalui platform katalog digital yang informatif dan mudah diakses.')
+@section('title', 'Tentang Kami – Katalog UMKM Kelurahan Karangpoh')
+@section('description', 'Pelajari inisiatif Kelurahan Karangpoh dalam mendukung dan memajukan pelaku UMKM lokal melalui platform katalog digital yang informatif dan mudah diakses.')
 
 @section('content')
     <section class="px-4 md:px-8 lg:px-16 xl:px-20">
@@ -24,23 +23,23 @@
             <div class="grid grid-cols-1 sm:[grid-template-columns:1fr_1.5fr_1fr] gap-4">
                 {{-- Left column --}}
                 <div class="flex flex-col gap-4">
-                    <img src="{{ asset('images/food/01.webp') }}" alt="Produk kuliner lokal Karangpoh"
+                    <img src="{{ asset('images/food/makanan-kuliner-lokal-karangpoh.webp') }}" alt="Produk kuliner lokal Karangpoh"
                         class="w-full aspect-square sm:aspect-[7/8] object-cover rounded-2xl shadow" />
-                    <img src="{{ asset('images/food/2.jpg') }}" alt="Kerajinan tangan buatan warga Karangpoh"
+                    <img src="{{ asset('images/food/hidangan-tradisional-lokal-karangpoh.jpg') }}" alt="Kerajinan tangan buatan warga Karangpoh"
                         class="w-full aspect-[4/3] object-cover rounded-2xl shadow" />
                 </div>
 
                 {{-- Middle column --}}
                 <div class="flex items-center">
-                    <img src="{{ asset('images/food/3.jpeg') }}" alt="Suasana UMKM di Kelurahan Karangpoh"
+                    <img src="{{ asset('images/food/suasana-makanan-umkm-karangpoh.jpeg') }}" alt="Suasana UMKM di Kelurahan Karangpoh"
                         class="w-full aspect-square object-cover rounded-2xl shadow my-4 md:my-12" />
                 </div>
 
                 {{-- Right column --}}
                 <div class="flex flex-col gap-4">
-                    <img src="{{ asset('images/food/4.jpeg') }}" alt="Minuman herbal lokal Karangpoh"
+                    <img src="{{ asset('images/food/minuman-dan-makanan-lokal-karangpoh.jpeg') }}" alt="Minuman herbal lokal Karangpoh"
                         class="w-full aspect-[4/3] object-cover rounded-2xl shadow" />
-                    <img src="{{ asset('images/food/6.webp') }}" alt="Produk kreatif warga Karangpoh"
+                    <img src="{{ asset('images/food/produk-makanan-kreatif-karangpoh.webp') }}" alt="Produk kreatif warga Karangpoh"
                         class="w-full aspect-square sm:aspect-[7/8] object-cover rounded-2xl shadow" />
                 </div>
             </div>
@@ -54,7 +53,7 @@
         </div>
 
         <div class="mx-auto">
-            <img src="{{ asset('images/food/fin.avif') }}" alt="Kegiatan bazar UMKM bersama warga Karangpoh"
+            <img src="{{ asset('images/food/kegiatan-bazar-umkm-karangpoh.avif') }}" alt="Kegiatan bazar UMKM bersama warga Karangpoh"
                 class="w-full aspect-video object-cover rounded-2xl shadow" />
         </div>
     </section>

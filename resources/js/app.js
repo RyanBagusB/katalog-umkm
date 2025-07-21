@@ -4,6 +4,9 @@ Livewire.start()
 
 import './bootstrap';
 
+import 'trix/dist/trix.css';
+import 'trix';
+
 
 // Import Chart.js
 import { Chart } from 'chart.js';

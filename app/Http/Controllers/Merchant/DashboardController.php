@@ -3,13 +3,19 @@
 namespace App\Http\Controllers\Merchant;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Merchant;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        $merchant = auth()->user()->merchant;
+        $user = Auth::user();
 
-        return view('merchant.dashboard', compact('merchant'));
+        $merchant = Merchant::with('products')
+            ->where('user_id', $user->id)
+            ->firstOrFail();
+
+        return view('admin.merchants.index', compact('merchant'));
     }
 }

@@ -1,77 +1,123 @@
 <x-app-layout>
     <div class="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
-        <!-- Dashboard actions -->
-        <div class="sm:flex sm:justify-between sm:items-center mb-8">
 
-            <!-- Left: Title -->
-            <div class="mb-4 sm:mb-0">
-                <h1 class="text-2xl md:text-3xl text-gray-800 dark:text-gray-100 font-bold">Dashboard</h1>
-            </div>
-
-            <!-- Right: Actions -->
-            <div class="grid grid-flow-col sm:auto-cols-max justify-start sm:justify-end gap-2">
-
-                {{-- <x-dropdown-filter align="right" />
-                <x-datepicker />
-                <button class="btn bg-gray-900 text-gray-100 hover:bg-gray-800 dark:bg-gray-100 dark:text-gray-800 dark:hover:bg-white">
-                    <svg class="fill-current shrink-0 xs:hidden" width="16" height="16" viewBox="0 0 16 16">
-                        <path d="M15 7H9V1c0-.6-.4-1-1-1S7 .4 7 1v6H1c-.6 0-1 .4-1 1s.4 1 1 1h6v6c0 .6.4 1 1 1s1-.4 1-1V9h6c.6 0 1-.4 1-1s-.4-1-1-1z" />
-                  </svg>
-                  <span class="max-xs:sr-only">Add View</span>
-                </button> --}}
-            </div>
+        {{-- Header --}}
+        <div class="mb-8">
+            <h1 class="text-2xl md:text-3xl font-bold text-gray-800 dark:text-gray-100">Dashboard</h1>
+            <p class="text-gray-500 dark:text-gray-400 mt-1">Selamat datang kembali, pantau data bisnismu di sini.</p>
         </div>
-        <div class="bg-white p-6 rounded-lg shadow-lg mb-6">
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="bg-blue-100 p-6 rounded-lg text-center shadow-md">
-                    <h3 class="text-lg font-semibold text-blue-700">Total Merchants</h3>
-                    <p class="text-4xl font-bold text-blue-800">{{$merchantsTotal}}</p>
-                    <div class="mt-4">
-                        <i class="fas fa-users text-blue-500 text-4xl"></i>
-                    </div>
-                </div>
 
-                <div class="bg-green-100 p-6 rounded-lg text-center shadow-md">
-                    <h3 class="text-lg font-semibold text-green-700">Total Products</h3>
-                    <p class="text-4xl font-bold text-green-800">{{$productsTotal}}</p>
-                    <div class="mt-4">
-                        <i class="fas fa-box text-green-500 text-4xl"></i>
-                    </div>
+        {{-- Overview Cards --}}
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10">
+            {{-- Total UMKM --}}
+            <div class="flex items-center p-5 bg-white dark:bg-gray-800 rounded-xl shadow">
+                <div class="p-3 rounded-full bg-indigo-100 text-indigo-600 mr-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 7l1.664-2.5A1 1 0 015.507 4h12.986a1 1 0 01.843.5L21 7M4 7h16v11a1 1 0 01-1 1H5a1 1 0 01-1-1V7z" />
+                    </svg>
                 </div>
-
-                <div class="bg-yellow-100 p-6 rounded-lg text-center shadow-md">
-                    <h3 class="text-lg font-semibold text-yellow-700">Total News</h3>
-                    <p class="text-4xl font-bold text-yellow-800">{{$newsTotal ?? 0}}</p>
-                    <div class="mt-4">
-                        <i class="fas fa-newspaper text-yellow-500 text-4xl"></i>
-                    </div>
+                <div>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">Total UMKM</p>
+                    <p class="text-2xl font-bold text-gray-800 dark:text-gray-100">{{ $totalMerchants }}</p>
                 </div>
             </div>
-        </div>
-        <div class="flex flex-wrap gap-8">
-            <div class="flex-1 min-w-[300px] bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
-                <h2 class="text-2xl font-semibold text-gray-800 mb-4">New Products</h2>
-                <ul class="space-y-4">
-                    @foreach($productNewer as $product)
-                        <li class="flex justify-between items-center text-gray-600 hover:text-gray-900 transition-colors duration-300">
-                            <span class="font-medium">{{$product->name}}</span>
-                            <span class="text-sm text-gray-500">{{ \Carbon\Carbon::parse($product->created_at)->diffForHumans() }}</span>
-                        </li>
-                    @endforeach
-                </ul>
+
+            {{-- Total Produk --}}
+            <div class="flex items-center p-5 bg-white dark:bg-gray-800 rounded-xl shadow">
+                <div class="p-3 rounded-full bg-green-100 text-green-600 mr-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M20 13V9a1 1 0 00-1-1h-3l-2-3H10L8 8H5a1 1 0 00-1 1v4m16 0h-3m-10 0H4m6 0v6m4-6v6" />
+                    </svg>
+                </div>
+                <div>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">Total Produk</p>
+                    <p class="text-2xl font-bold text-gray-800 dark:text-gray-100">{{ $totalProducts }}</p>
+                </div>
             </div>
 
-            <div class="flex-1 min-w-[300px] bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
-                <h2 class="text-2xl font-semibold text-gray-800 mb-4">New Merchants</h2>
-                <ul class="space-y-4">
-                    @foreach($merchNewer as $merchant)
-                        <li class="flex justify-between items-center text-gray-600 hover:text-gray-900 transition-colors duration-300">
-                            <span class="font-medium">{{$merchant->username}}</span>
-                            <span class="text-sm text-gray-500">{{ \Carbon\Carbon::parse($merchant->created_at)->diffForHumans() }}</span>
-                        </li>
-                    @endforeach
-                </ul>
+            {{-- Total Berita --}}
+            <div class="flex items-center p-5 bg-white dark:bg-gray-800 rounded-xl shadow">
+                <div class="p-3 rounded-full bg-yellow-100 text-yellow-600 mr-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10l6 6v8a2 2 0 01-2 2z" />
+                    </svg>
+                </div>
+                <div>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">Total Berita</p>
+                    <p class="text-2xl font-bold text-gray-800 dark:text-gray-100">{{ $totalNews }}</p>
+                </div>
             </div>
         </div>
+
+        {{-- Data Terbaru --}}
+        <div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
+            {{-- UMKM Terbaru --}}
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow">
+                <header class="px-5 py-4 border-b border-gray-100 dark:border-gray-700/60">
+                    <h2 class="font-semibold text-gray-800 dark:text-gray-100">UMKM Terbaru</h2>
+                </header>
+                <div class="p-3 overflow-x-auto">
+                    <table class="table-auto w-full text-sm">
+                        <thead class="text-xs font-semibold uppercase text-gray-400 dark:text-gray-500 bg-gray-50 dark:bg-gray-700/50">
+                            <tr>
+                                <th class="p-2 text-left">Nama</th>
+                                <th class="p-2 text-left">Status</th>
+                                <th class="p-2 text-left">Dibuat</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-100 dark:divide-gray-700/60">
+                            @forelse($latestMerchants as $merchant)
+                                <tr>
+                                    <td class="p-2 font-medium text-gray-800 dark:text-gray-100">{{ $merchant->name }}</td>
+                                    <td class="p-2">
+                                        @if($merchant->is_active)
+                                            <span class="px-2 py-1 text-xs rounded-full bg-green-100 text-green-700">Aktif</span>
+                                        @else
+                                            <span class="px-2 py-1 text-xs rounded-full bg-gray-200 text-gray-700">Nonaktif</span>
+                                        @endif
+                                    </td>
+                                    <td class="p-2 text-gray-500 dark:text-gray-400">{{ $merchant->created_at->format('d M Y') }}</td>
+                                </tr>
+                            @empty
+                                <tr><td class="p-3 text-center text-gray-500" colspan="3">Belum ada data.</td></tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            {{-- Produk Terbaru --}}
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow">
+                <header class="px-5 py-4 border-b border-gray-100 dark:border-gray-700/60">
+                    <h2 class="font-semibold text-gray-800 dark:text-gray-100">Produk Terbaru</h2>
+                </header>
+                <div class="p-3 overflow-x-auto">
+                    <table class="table-auto w-full text-sm">
+                        <thead class="text-xs font-semibold uppercase text-gray-400 dark:text-gray-500 bg-gray-50 dark:bg-gray-700/50">
+                            <tr>
+                                <th class="p-2 text-left">Nama Produk</th>
+                                <th class="p-2 text-left">UMKM</th>
+                                <th class="p-2 text-left">Harga</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-100 dark:divide-gray-700/60">
+                            @forelse($latestProducts as $product)
+                                <tr>
+                                    <td class="p-2 font-medium text-gray-800 dark:text-gray-100">{{ $product->name }}</td>
+                                    <td class="p-2 text-gray-600 dark:text-gray-400">{{ $product->merchant->name ?? '-' }}</td>
+                                    <td class="p-2 text-gray-800 dark:text-gray-100">Rp{{ number_format($product->price, 0, ',', '.') }}</td>
+                                </tr>
+                            @empty
+                                <tr><td class="p-3 text-center text-gray-500" colspan="3">Belum ada data.</td></tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
     </div>
 </x-app-layout>

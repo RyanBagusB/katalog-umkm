@@ -72,7 +72,7 @@
 
             {{-- Gambar --}}
             <div class="flex flex-col">
-                <img src="{{ asset('images/auth-image.jpg') }}" alt="Gambar kegiatan UMKM di Kelurahan Karangpoh"
+                <img src="{{ asset('images/food/makanan-kuliner-lokal-karangpoh.webp') }}" alt="Gambar kegiatan UMKM di Kelurahan Karangpoh"
                     class="w-full h-full object-cover rounded-[40px] shadow aspect-video" />
             </div>
         </div>

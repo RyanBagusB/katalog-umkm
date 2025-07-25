@@ -16,6 +16,6 @@ class DashboardController extends Controller
             ->where('user_id', $user->id)
             ->firstOrFail();
 
-        return view('admin.merchants.index', compact('merchant'));
+        return view('merchant.dashboard', compact('merchant'));
     }
 }
